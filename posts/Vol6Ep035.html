@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Classic FASERIP Podcast Volume 6 Issue 35 – Vehicles Rules</title>
+  <title>The Classic FASERIP Podcast</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Show notes for The Classic FASERIP Podcast Volume 6 Issue 35 – Vehicles Rules.">
+  <meta name="description" content="The Classic FASERIP Podcast, covering the Marvel Super Heroes RPG by TSR.">
+
+  <!-- Social previews -->
+  <meta property="og:title" content="The Classic FASERIP Podcast">
+  <meta property="og:description" content="Covering the Marvel Super Heroes RPG by TSR with rules talk, villains, campaigns, and table stories.">
+  <meta property="og:image" content="https://classicfaserip.com/images/banner.png">
+  <meta property="og:url" content="https://classicfaserip.com/">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Classic FASERIP Podcast">
+  <meta name="twitter:description" content="Covering the Marvel Super Heroes RPG by TSR with rules talk, villains, campaigns, and table stories.">
+  <meta name="twitter:image" content="https://classicfaserip.com/images/banner.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
   <style>
     * {
@@ -12,20 +25,16 @@
     }
 
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #f5f5f5;
-      background-color: #000000;
-      background-image: url("../images/background.jpg");
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
-      background-blend-mode: multiply;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f5f5f5;
+  background-color: #000000;
+  background-image: url("images/background.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
 
     a {
       color: #ffcc33;
@@ -55,7 +64,7 @@
       font-family: "Bangers", Arial, sans-serif;
       letter-spacing: 2px;
       color: #ffcc33;
-      font-size: 1.1rem;
+      font-size: 1.6rem;
       text-shadow: 2px 2px 0 #000000;
     }
 
@@ -92,139 +101,128 @@
       text-decoration: none;
     }
 
-    main {
-      flex: 1;
-    }
-
-    .page-wrap {
+    .wrapper {
       max-width: 1100px;
       margin: 20px auto 40px auto;
       padding: 0 10px;
-    }
-
-    .back-link {
-      margin-bottom: 12px;
-      font-size: 0.85rem;
-    }
-
-    .back-link a {
-      color: #cccccc;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    .back-link a:hover {
-      color: #ffcc33;
-      border-color: #ffcc33;
-      text-decoration: none;
-    }
-
-    .episode-card {
-      background: radial-gradient(circle at top, rgba(255, 204, 51, 0.16), rgba(0, 0, 0, 0.96));
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.8);
-      padding: 18px 18px 20px 18px;
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      display: flex;
       gap: 20px;
+      align-items: flex-start;
     }
 
-    @media (max-width: 840px) {
-      .episode-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    main.content {
+      flex: 3;
     }
 
-    .episode-main h1 {
-      margin: 0 0 4px 0;
+    aside.sidebar {
+      flex: 1;
+      background-color: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      padding: 15px;
+    }
+
+    .post {
+      background-color: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .post h2 {
+      margin: 0 0 6px 0;
       font-family: "Bangers", Arial, sans-serif;
       letter-spacing: 1px;
-      font-size: 1.6rem;
       color: #ffcc33;
-      text-shadow: 2px 2px 0 #000000;
+      font-size: 1.4rem;
+      text-shadow: 1px 1px 0 #000000;
     }
 
-    .issue-label {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #ffe27a;
-      margin-bottom: 4px;
+    .post h2 a {
+      color: #ffcc33;
     }
 
-    .episode-meta {
+    .post .meta {
       font-size: 0.85rem;
       color: #cccccc;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
     }
 
-    .episode-meta span + span::before {
-      content: "•";
-      margin: 0 6px;
-      opacity: 0.7;
-    }
-
-    .section-title {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #ffcc33;
-      margin: 0 0 6px 0;
-    }
-
-    .episode-description p {
-      margin: 0 0 8px 0;
+    .post p {
+      margin: 0 0 10px 0;
       font-size: 0.95rem;
     }
 
-    .episode-description p:last-child {
-      margin-bottom: 0;
+    .sidebar h3 {
+      font-family: "Bangers", Arial, sans-serif;
+      font-size: 1.1rem;
+      margin: 0 0 8px 0;
+      color: #ffcc33;
+      text-shadow: 1px 1px 0 #000000;
     }
 
-    .links ul {
-      list-style: none;
-      padding: 0;
-      margin: 4px 0 0 0;
+    .sidebar p,
+    .sidebar li {
       font-size: 0.9rem;
     }
 
-    .links li + li {
-      margin-top: 4px;
+    .widget {
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 12px;
     }
 
-    .player-box {
-      background-color: rgba(0, 0, 0, 0.9);
-      border-radius: 14px;
+    .widget:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 5px;
+    }
+
+    .badge-links a {
+      display: inline-block;
+      margin: 4px 6px 4px 0;
+      padding: 6px 10px;
+      background-color: #222222;
+      border-radius: 3px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .player-box iframe {
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      min-height: 160px;
-    }
-
-    .player-note {
       font-size: 0.8rem;
-      color: #cccccc;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-links a:hover {
+      background-color: #ffcc33;
+      color: #111111;
+    }
+
+    .more-link {
+      text-align: center;
+      margin: 10px 0 20px 0;
+    }
+
+    .more-link a {
+      font-weight: bold;
+      font-size: 0.95rem;
     }
 
     footer {
       text-align: center;
       color: #bbbbbb;
-      font-size: 0.8rem;
-      padding: 12px 10px 20px 10px;
+      font-size: 0.85rem;
+      padding: 15px 10px 25px 10px;
       background-color: rgba(0, 0, 0, 0.95);
       border-top: 2px solid #ffcc33;
     }
@@ -232,78 +230,395 @@
     footer a {
       color: #ffcc33;
     }
+
+    @media (max-width: 800px) {
+      .wrapper {
+        flex-direction: column;
+      }
+
+      nav a {
+        padding: 8px 12px;
+      }
+    }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="../images/banner.png" alt="The Classic FASERIP Podcast banner">
+    <img src="images/banner.png" alt="The Classic FASERIP Podcast banner">
     <p class="tagline">Covering the Marvel Super Heroes RPG by TSR</p>
   </header>
 
   <nav>
     <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../about.html">About</a></li>
-      <li><a href="../index.html#links">Links</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="xuniverse.html">X-Universe</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#links">Links</a></li>
     </ul>
   </nav>
 
-  <main>
-    <div class="page-wrap">
-      <p class="back-link">
-        <a href="../index.html#episodes">&#8592; Back to Home</a>
+  <div class="wrapper">
+    <main class="content" id="episodes">
+
+      <!-- Latest 10 episodes -->
+
+      <article class="post">
+        <h2><a href="posts/Vol5Ep034.html">Volume 5 Issue 34 - Happy Birthday Steve Rogers</a></h2>
+        <p class="meta">Released July 9, 2022 · about 59 minutes</p>
+        <p>
+          Vince and Golden Buddha talk about Steve Rogers turning 100, favorite Captain America
+          moments, and different takes on the character you can use in your own games.
+        </p>
+      </article>
+
+      <article class="post">
+        <h2><a href="posts/Vol5Ep033.html">Volume 5 Issue 33 - Four Colors RPG and More</a></h2>
+        <p class="meta">Released June 17, 2022 · about 66 minutes</p>
+        <p>
+          A look at the Four Colors RPG as a FASERIP style clone, plus a return of Villain of the Week
+          with talk about building sessions around random foes.
+        </p>
+      </article>
+
+      <article class="post">
+        <h2><a href="posts/Vol5Ep032.html">Volume 5 Issue 32 - Killville</a></h2>
+        <p class="meta">Released June 2, 2022 · about 29 minutes</p>
+        <p>
+          Discussion of Killville as a harsh setting for Marvel Super Heroes, how to run it,
+          and ways to keep the table engaged with that tone.
+        </p>
+      </article>
+
+      <article class="post">
+        <h2><a href="posts/Vol4Ep031.html">Volume 4 Issue 31 - Dire Wraiths!</a></h2>
+        <p class="meta">Release details coming soon</p>
+        <p>
+          Look at Dire Wraiths, their lore and stats, and how to keep them creepy and dangerous in play.
+        </p>
+      </article>
+
+      <article class="post">
+        <h2><a href="posts/Vol4Ep030.html">Volume 4 Issue 30 - Email Bag and Judge Advice!</a></h2>
+        <p class="meta">Release details coming soon</p>
+        <p>
+          Email questions from listeners and Judge focused advice based on those topics and concerns.
+        </p>
+      </article>
+
+      <article class="post">
+        <h2><a href="posts/Vol4Ep029.html">Volume 4 Issue 29 - We are back from the dead!</a></h2>
+        <p class="meta">Release details coming soon</p>
+        <p>
+          Volume 4 opener that returns from hiatus and talks about what is next for the Classic FASERIP Podcast.
+        </p>
+      </article>
+
+      <article class="post">
+        <h2><a href="posts/Vol3Ep028.html">Volume 3 Issue 28 - Base building and more!</a></h2>
+        <p class="meta">Release details coming soon</p>
+        <p>
+          Building hero bases, using them as adventure hooks, and letting them grow with the campaign.
+        </p>
+      </article>
+
+      <article class="post">
+        <h2><a href="posts/Vol3Ep027.html">Volume 3 Issue 27 - Origins of Power!</a></h2>
+        <p class="meta">Release details coming soon</p>
+        <p>
+          Origins of power for heroes and villains and how those origins can drive plots at the table.
+        </p>
+      </article>
+
+      <article class="post">
+        <h2><a href="posts/Vol3Ep026.html">Volume 3 Issue 26 - Random Encounters</a></h2>
+        <p class="meta">Release details coming soon</p>
+        <p>
+          How to use random encounters in FASERIP, pull from tables, and still keep them meaningful to the story.
+        </p>
+      </article>
+
+      <article class="post">
+        <h2><a href="posts/Vol3Ep025.html">Volume 3 Issue 25 - Weaknesses and the return of DM Matt!</a></h2>
+        <p class="meta">Release details coming soon</p>
+        <p>
+          Discussion on character weaknesses, why they matter, and a welcome back for DM Matt to the show.
+        </p>
+      </article>
+
+      <p class="more-link">
+        <a href="#" id="show-more">More...</a>
       </p>
 
-      <article class="episode-card">
-        <section class="episode-main">
-          <header>
-            <div class="issue-label">VOLUME 6 • ISSUE 35</div>
-            <h1>The Classic FASERIP Podcast Volume 6 Issue 35 – Vehicles Rules</h1>
-            <p class="episode-meta">
-              <span>Release details coming soon</span>
-            </p>
-          </header>
+      <!-- Older episodes, hidden at first -->
 
-          <section class="episode-description">
-            <h2 class="section-title">Show Notes</h2>
-            <p>
-              This episode walks through the Vehicles rules for Classic FASERIP and talks about how to use them at the table
-              without slowing the game to a crawl.
-            </p>
-            <p>
-              You hear talk about movement and speed ranks, handling rolls, chases on land and in the air, and how much
-              damage a crash should really do to both the car and the heroes inside it.
-            </p>
-            <p>
-              If you want car chases that feel fast and clear, this episode gives you a simple way to bring those rules into play.
-            </p>
-          </section>
+      <div id="more-posts" style="display: none;">
 
-          <section class="links">
-            <h2 class="section-title">Links Mentioned</h2>
-            <ul>
-              <li><a href="http://classicmarvelforever.com/cms/" target="_blank" rel="noopener noreferrer">Classic Marvel Forever fan site</a></li>
-              <li><a href="https://www.facebook.com/groups/MSHUCP/" target="_blank" rel="noopener noreferrer">Marvel Super Heroes UCP Facebook group</a></li>
-            </ul>
-          </section>
-        </section>
-
-        <aside class="player-box">
-          <h2 class="section-title">Listen on Spotify</h2>
-          <iframe src="https://open.spotify.com/embed/episode/7BNTNSSOG0SsoOk8SZSl5G?utm_source=generator"
-                  loading="lazy"
-                  allowtransparency="true"
-                  allow="encrypted-media"></iframe>
-          <p class="player-note">
-            This embed plays Volume 6 Issue 35 – Vehicles Rules from The Classic FASERIP Podcast on Spotify.
+        <article class="post">
+          <h2><a href="posts/Vol3Ep024.html">Volume 3 Issue 24 - Total Memory, WandaVision, the Punisher and more!</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Total Memory power talk mixed with WandaVision, the Punisher, and how those ideas feed into campaigns.
           </p>
-        </aside>
-      </article>
-    </div>
-  </main>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol3Ep023.html">Volume 3 Issue 23 - We're back!</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Start of Volume 3 with a return show, check in, and talk about plans for upcoming episodes.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep022.html">Volume 2 Issue 22 - Multi Actions House Rules</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            House rules for handling multiple actions, why they were written, and how they affect table play.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep021.html">Volume 2 Issue 21 - Back with lots of news/updates!</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            News and updates episode that checks in on the community, projects, and the state of the podcast.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep020.html">Volume 2 Issue 20 - Projects, MCU Phase 4 & Adventure Structure</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Talk about new projects, MCU Phase 4, and ways to structure adventures that feel strong and clear.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep019.html">Volume 2 Issue 19 - Far From Home as an Adventure?</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Spider Man Far From Home discussed as a model adventure and how you can turn that story into a session.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep018.html">Volume 2 Issue 18 - Running Normal Humans</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Thoughts on campaigns with normal human characters, higher risk play, and how to keep it interesting.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep017.html">Volume 2 Issue 17 - Talking SECRET WARS!</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Focused look at Secret Wars and how to run that style of event or module in your own FASERIP campaigns.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep016.html">Volume 2 Issue 16 - We're back, talking Projects and the future of the MCU!</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Return episode that covers community projects, MCU chatter, and what might be coming next for the show.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep015.html">Volume 2 Issue 15 - Captain Marvel Recap & Death, Dying Rules</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Captain Marvel movie talk along with a look at death and dying rules at the table and in the system.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep014.html">Volume 2 Issue 14 - Magic Basics</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Basics of using magic in FASERIP style games and how to work it into a Marvel focused campaign.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep013.html">Volume 2 Issue 13 - Inspiration?</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Where to find ideas for campaigns, villains, and adventures when you want new material for your game.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep012.html">Volume 2 Issue 12 - Let's Talk Speedsters</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Discussion on speedster characters, rules questions, and keeping high speed action fun and fair.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol2Ep011.html">Volume 2 Issue 11 - Team Building Concepts</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Talk about building hero teams, roles at the table, and making sure every player has a place in the group.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep010.html">Volume 1 Issue 10 - What is FASERIP TACTICS?</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Overview of FASERIP TACTICS and how it connects to classic Marvel Super Heroes style play.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep009.html">Volume 1 Issue 9 - Control Powers</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Breakdown of control powers, how they function, and how to keep them balanced in play.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep008.html">Volume 1 Issue 8 - Popularity and Resources</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Detailed chat on how Popularity and Resources work and how to use those mechanics at the table.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep007.html">Volume 1 Issue 7 - Gadgets!</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Episode focused on gadgets, gear, and handling tech based heroes and items in FASERIP games.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep006.html">Volume 1 Issue 6 - Creating Super Villains!</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            How to build strong super villains, give them motives, and make them stick in your players minds.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep005.html">Volume 1 Issue 5 - The Bullpen show!</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Bullpen style chat with news, updates, and general FASERIP talk from around the community and table.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep004a.html">Volume 1 Issue 4a - Bound for Glory!</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Special Bound for Glory episode that focuses on Skull the Slayer and classic style Marvel action.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep004.html">Volume 1 Issue 4 - With Great Power, comes creation?</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Talk about character creation, power choices, and building heroes that fit the tone of your campaign.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep003.html">Volume 1 Issue 3 - Judges Be Judging</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Advice for Judges on rulings at the table, pacing, and keeping the game fair and fun for everyone.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep002.html">Volume 1 Issue 2 - Street level games</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Discussion on running street level campaigns, smaller scale heroes, and threats that fit those stories.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep001.html">Volume 1 Issue 1 - Tell me about FASERIP</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Vince breaks down what the TSR Marvel FASERIP game is, why it still works, and what the podcast will cover.
+          </p>
+        </article>
+
+        <article class="post">
+          <h2><a href="posts/Vol1Ep000.html">Volume 1 Issue 0 - Trailer</a></h2>
+          <p class="meta">Release details coming soon</p>
+          <p>
+            Short trailer that introduces the Classic FASERIP Podcast and what you can expect from the show.
+          </p>
+        </article>
+
+      </div> <!-- end #more-posts -->
+
+    </main>
+
+    <aside class="sidebar">
+      <section class="widget" id="about">
+        <h3>About The Show</h3>
+        <p>
+          The Classic FASERIP Podcast celebrates the Marvel Super Heroes RPG by TSR with rules talk,
+          villains, campaigns, and table stories.
+        </p>
+      </section>
+
+      <section class="widget" id="links">
+        <h3>Subscribe</h3>
+        <div class="badge-links">
+          <a href="https://open.spotify.com/show/6aGLI144i7p4RqtKB9qZcI" target="_blank" rel="noopener">Spotify</a>
+          <a href="https://podcasts.apple.com/us/podcast/the-classic-faserip-podcast/id1316296194" target="_blank" rel="noopener">Apple</a>
+          <a href="https://www.youtube.com/@FASERIP" target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </section>
+
+      <section class="widget">
+        <h3>Important Links</h3>
+        <ul>
+          <li><a href="http://classicmarvelforever.com/cms/" target="_blank" rel="noopener">Classic Marvel Forever</a></li>
+          <li><a href="https://ko-fi.com/faserip" target="_blank" rel="noopener">Support on Ko-fi</a></li>
+          <li><a href="https://www.facebook.com/groups/MSHUCP/" target="_blank" rel="noopener">UCP Facebook Group</a></li>
+          <li><a href="https://www.reddit.com/r/MarvelFASERIP/" target="_blank" rel="noopener">Reddit Page</a></li>
+        </ul>
+      </section>
+
+      <section class="widget" id="contact">
+        <h3>Contact The Show</h3>
+        <p>Email: <a href="mailto:askthedm@theevildm.com">askthedm@theevildm.com</a></p>
+      </section>
+    </aside>
+  </div>
 
   <footer>
-    <p><a href="../index.html">Home</a> · ClassicFASERIP.com · This is a WIP site, please pardon some mistakes.</p>
+    <p><a href="index.html">Home</a> · The Classic FASERIP Podcast · © The Evil Dungeon Master</p>
+    <p>This is a WIP site, please pardon some mistakes.</p>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var link = document.getElementById("show-more");
+      var more = document.getElementById("more-posts");
+      if (link && more) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          more.style.display = "block";
+          link.parentElement.style.display = "none";
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
