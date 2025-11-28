@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Classic FASERIP Character Generator</title>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0b0b10;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 1.5rem;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #15151f;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem 2rem;
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+      border: 1px solid #24243a;
+    }
+
+    h1, h2 {
+      margin: 0 0 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      color: #ffcc33;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      color: #99e0ff;
+      margin-top: 1.25rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: #1c1c29;
+      border-radius: 6px;
+      border: 1px solid #2a2a3d;
+      padding: 0.75rem 0.9rem 0.9rem;
+    }
+
+    .card-header {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9fd4ff;
+      margin-bottom: 0.35rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
+      color: #c7c7d9;
+    }
+
+    input[type="text"], select, textarea {
+      width: 100%;
+      box-sizing: border-box;
+      background: #12121b;
+      border: 1px solid #343450;
+      color: #f5f5f5;
+      padding: 0.3rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 0.8rem;
+      color: #c7c7d9;
+      margin-top: 0.1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .small-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.8rem 0 0.4rem;
+    }
+
+    .mini-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.4rem 0 0.3rem;
+    }
+
+    button {
+      background: #ffcc33;
+      color: #1b1b24;
+      border: none;
+      border-radius: 4px;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+    }
+
+    button.secondary {
+      background: #2e2e45;
+      color: #f5f5f5;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .abilities-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    .abilities-table th,
+    .abilities-table td {
+      padding: 0.25rem 0.35rem;
+      text-align: left;
+    }
+
+    .abilities-table thead th {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.75rem;
+      color: #9fd4ff;
+      border-bottom: 1px solid #343450;
+    }
+
+    .abilities-table tbody tr:nth-child(odd) {
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    .ability-name {
+      font-weight: 600;
+      color: #ffcc33;
+    }
+
+    .ability-rank {
+      font-weight: 600;
+    }
+
+    .bar-wrapper {
+      width: 100%;
+      height: 10px;
+      border-radius: 10px;
+      background: #101018;
+      overflow: hidden;
+      border: 1px solid #303048;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 10%;
+      background: linear-gradient(90deg, #3fe26e, #ffd84a, #ff4a4a);
+      transition: width 0.2s ease-out;
+    }
+
+    .section-inline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.5rem;
+      margin-top: 0.35rem;
+      font-size: 0.85rem;
+    }
+
+    .tagline {
+      font-size: 0.8rem;
+      color: #9d9db0;
+      margin-top: 0.4rem;
+    }
+
+    .footer-note {
+      text-align: right;
+      font-size: 0.75rem;
+      color: #7a7a9a;
+      margin-top: 1rem;
+    }
+
+    /* Character sheet preview styling */
+
+    .summary-block {
+      background: #101018;
+      border-radius: 6px;
+      border: 1px solid #2f3553;
+      padding: 0.75rem 0.85rem 0.9rem;
+      margin-top: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .sheet {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .sheet-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .sheet-header-row {
+      align-items: flex-end;
+      border-bottom: 1px solid #353b60;
+      padding-bottom: 0.4rem;
+    }
+
+    .sheet-hero-block {
+      flex: 2 1 220px;
+    }
+
+    .sheet-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #9fa5d8;
+    }
+
+    .sheet-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #f5f5f5;
+    }
+
+    .sheet-value.big {
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      color: #ffdc4d;
+    }
+
+    .sheet-origin-block {
+      flex: 1 1 160px;
+      padding: 0.35rem 0.45rem;
+      border-radius: 4px;
+      background: radial-gradient(circle at top left, rgba(255,204,51,0.25), transparent 55%);
+      border: 1px solid #414878;
+    }
+
+    .sheet-origin-line {
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.4rem;
+    }
+
+    .sheet-origin-line span {
+      white-space: nowrap;
+    }
+
+    .sheet-mid-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 2.1fr) minmax(0, 1.5fr);
+      gap: 0.6rem;
+    }
+
+    .sheet-box {
+      border-radius: 4px;
+      border: 1px solid #2c3254;
+      background: #15172a;
+      padding: 0.4rem 0.5rem 0.45rem;
+    }
+
+    .sheet-box-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #9fd4ff;
+      margin-bottom: 0.25rem;
+    }
+
+    .sheet-box table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    .sheet-box table td {
+      padding: 0.1rem 0.2rem;
+      vertical-align: top;
+    }
+
+    .sheet-box table td:first-child {
+      width: 38%;
+      color: #e9e9ff;
+    }
+
+    .sheet-box table td:nth-child(2) {
+      width: 32%;
+      color: #ffdc4d;
+    }
+
+    .sheet-box table td:nth-child(3) {
+      width: 30%;
+      text-align: right;
+      color: #b3b3d0;
+    }
+
+    .sheet-vitals-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .sheet-vitals-line span:first-child {
+      color: #c7c7e5;
+    }
+
+    .sheet-vitals-line span:last-child {
+      color: #ffd966;
+    }
+
+    .sheet-bottom-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.6rem;
+    }
+
+    .sheet-bottom-row-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.4rem;
+    }
+
+    .sheet-list {
+      font-size: 0.8rem;
+      max-height: 8.5rem;
+      overflow-y: auto;
+    }
+
+    .sheet-list-item {
+      margin-bottom: 0.15rem;
+    }
+
+    .sheet-list-label {
+      color: #ffdc4d;
+      font-weight: 500;
+    }
+
+    .sheet-empty {
+      font-size: 0.8rem;
+      color: #8080a5;
+      font-style: italic;
+    }
+
+    .sheet-image-box {
+      border-radius: 4px;
+      border: 1px solid #2c3254;
+      background: #05060d;
+      padding: 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+    }
+
+    .sheet-image-box img {
+      max-width: 100%;
+      max-height: 170px;
+      border-radius: 4px;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .sheet-image-placeholder {
+      font-size: 0.8rem;
+      color: #8080a5;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    @media (max-width: 800px) {
+      .sheet-mid-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 0.75rem;
+      }
+
+      .page {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Classic FASERIP Character Generator</h1>
+    <div class="subtitle">
+      Basic Revised style heroes for your table.
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Identity</div>
+        <div class="small-row">
+          <div>
+            <label for="heroName">Hero Name</label>
+            <input type="text" id="heroName" placeholder="The Bronze Sentinel">
+          </div>
+          <div>
+            <label for="realName">Real Name</label>
+            <input type="text" id="realName" placeholder="Jamie Grant">
+          </div>
+        </div>
+        <div class="small-row">
+          <div>
+            <label for="playerName">Player</label>
+            <input type="text" id="playerName" placeholder="Player">
+          </div>
+          <div>
+            <label for="campaign">Campaign</label>
+            <input type="text" id="campaign" placeholder="Classic FASERIP">
+          </div>
+        </div>
+        <label for="origin">Origin</label>
+        <select id="origin">
+          <option value="random">(Random)</option>
+          <option value="normal">Normal Human</option>
+          <option value="altered">Altered Human</option>
+          <option value="mutant">Mutant</option>
+          <option value="hi-tech">High-Tech</option>
+          <option value="robot">Robot</option>
+          <option value="alien">Alien</option>
+        </select>
+        <label for="powerLevel" style="margin-top:0.4rem;">Power Level</label>
+        <select id="powerLevel">
+          <option value="random">(Random)</option>
+          <option value="standard">Standard Hero</option>
+          <option value="street">Street Level</option>
+          <option value="cosmic">Cosmic</option>
+        </select>
+
+        <label for="imageUrl" style="margin-top:0.5rem;">Portrait URL / Path</label>
+        <input type="text" id="imageUrl" placeholder="/images/hero-headshot.png">
+        <label for="imageFile" style="margin-top:0.35rem;">or Upload Portrait</label>
+        <input type="file" id="imageFile" accept="image/*">
+
+        <div class="tagline">
+          Origin guides powers, talents, contacts.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Background & Notes</div>
+        <label for="background">Background</label>
+        <textarea id="background" placeholder="Former pilot caught in a cosmic ray storm..."></textarea>
+        <label for="notes" style="margin-top:0.35rem;">Notes</label>
+        <textarea id="notes" placeholder="Quirks, enemies, base, gear..."></textarea>
+      </div>
+    </div>
+
+    <h2>Generation Controls</h2>
+    <div class="card">
+      <div class="controls">
+        <button onclick="generateFullHero()">Generate Full Hero</button>
+        <button class="secondary" onclick="rollAbilitiesButton()">Re-roll Abilities</button>
+        <button class="secondary" onclick="rollPowersButton()">Re-roll Powers</button>
+        <button class="secondary" onclick="clearSheet()">Clear Sheet</button>
+      </div>
+      <div class="tagline">
+        Full hero handles everything. Other buttons let you tweak.
+      </div>
+    </div>
+
+    <h2>FASERIP Abilities</h2>
+    <div class="card">
+      <table class="abilities-table" id="abilitiesTable">
+        <thead>
+          <tr>
+            <th>Ability</th>
+            <th>Rank</th>
+            <th>Value</th>
+            <th style="width:45%;">Profile</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Filled by script -->
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Powers, Talents, Contacts</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Powers</div>
+        <div class="section-inline">
+          <div>
+            <label for="powersCount">Number of Powers</label>
+            <input type="text" id="powersCount" value="0">
+          </div>
+        </div>
+        <div class="mini-controls">
+          <button class="secondary" onclick="rollPowersButton()">Roll / Re-roll Powers</button>
+        </div>
+        <label for="powersList" style="margin-top:0.2rem;">Power List</label>
+        <textarea id="powersList" placeholder="Energy Blast - Remarkable (30)"></textarea>
+        <div class="tagline">
+          Ranks are added where they matter.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Talents & Contacts</div>
+        <div class="section-inline">
+          <div>
+            <label for="talentsCount">Talents</label>
+            <input type="text" id="talentsCount" value="0">
+          </div>
+          <div>
+            <label for="contactsCount">Contacts</label>
+            <input type="text" id="contactsCount" value="0">
+          </div>
+        </div>
+        <div class="mini-controls">
+          <button class="secondary" onclick="rollTalentsButton()">Roll / Re-roll Talents</button>
+          <button class="secondary" onclick="rollContactsButton()">Roll / Re-roll Contacts</button>
+        </div>
+        <label for="talentsList" style="margin-top:0.2rem;">Talent List</label>
+        <textarea id="talentsList" placeholder="Martial Arts A - +1CS unarmed attacks"></textarea>
+        <label for="contactsList" style="margin-top:0.35rem;">Contacts</label>
+        <textarea id="contactsList" placeholder="Police Detective, Reporter..."></textarea>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Resources & Karma</div>
+        <div class="section-inline">
+          <div>
+            <label for="resources">Resources Rank</label>
+            <input type="text" id="resources" placeholder="Good (10)">
+          </div>
+          <div>
+            <label for="karma">Starting Karma</label>
+            <input type="text" id="karma" placeholder="R + I + P">
+          </div>
+        </div>
+        <label for="health" style="margin-top:0.35rem;">Health</label>
+        <input type="text" id="health" placeholder="F + A + S + E">
+        <label for="popularity" style="margin-top:0.35rem;">Popularity</label>
+        <input type="text" id="popularity" placeholder="Rank and value">
+      </div>
+    </div>
+
+    <h2>Character Sheet Preview</h2>
+    <div class="card">
+      <div class="card-header">Table Ready Sheet</div>
+      <div id="summary" class="summary-block">
+        <div class="sheet-empty">
+          Generate a hero to show a full character sheet preview here.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Classic FASERIP style generator. Adjust tables to match your book.
+    </div>
+  </div>
+
+  <script>
+    var ABILITIES = [
+      "Fighting",
+      "Agility",
+      "Strength",
+      "Endurance",
+      "Reason",
+      "Intuition",
+      "Psyche"
+    ];
+
+    var RANK_TABLES = {
+      street: [
+        { name: "Feeble",    value: 2,   min:  1, max: 10 },
+        { name: "Poor",      value: 4,   min: 11, max: 25 },
+        { name: "Typical",   value: 6,   min: 26, max: 55 },
+        { name: "Good",      value: 10,  min: 56, max: 80 },
+        { name: "Excellent", value: 20,  min: 81, max: 95 },
+        { name: "Remarkable",value: 30,  min: 96, max: 100 }
+      ],
+      standard: [
+        { name: "Poor",      value: 4,   min:  1, max: 10 },
+        { name: "Typical",   value: 6,   min: 11, max: 25 },
+        { name: "Good",      value: 10,  min: 26, max: 55 },
+        { name: "Excellent", value: 20,  min: 56, max: 80 },
+        { name: "Remarkable",value: 30,  min: 81, max: 95 },
+        { name: "Incredible",value: 40,  min: 96, max: 100 }
+      ],
+      cosmic: [
+        { name: "Typical",    value: 6,   min:  1, max: 10 },
+        { name: "Good",       value: 10,  min: 11, max: 25 },
+        { name: "Excellent",  value: 20,  min: 26, max: 50 },
+        { name: "Remarkable", value: 30,  min: 51, max: 75 },
+        { name: "Incredible", value: 40,  min: 76, max: 90 },
+        { name: "Amazing",    value: 50,  min: 91, max: 100 }
+      ]
+    };
+
+    var ORIGINS = {
+      normal: {
+        label: "Normal Human",
+        powers: 0,
+        talents: 3,
+        contacts: 2,
+        basePopularity: "Typical (6)"
+      },
+      altered: {
+        label: "Altered Human",
+        powers: 2,
+        talents: 2,
+        contacts: 2,
+        basePopularity: "Typical (6)"
+      },
+      mutant: {
+        label: "Mutant",
+        powers: 3,
+        talents: 2,
+        contacts: 1,
+        basePopularity: "Poor (4)"
+      },
+      "hi-tech": {
+        label: "High-Tech",
+        powers: 1,
+        talents: 3,
+        contacts: 2,
+        basePopularity: "Good (10)"
+      },
+      robot: {
+        label: "Robot",
+        powers: 3,
+        talents: 1,
+        contacts: 1,
+        basePopularity: "Feeble (2)"
+      },
+      alien: {
+        label: "Alien",
+        powers: 2,
+        talents: 2,
+        contacts: 1,
+        basePopularity: "Typical to Excellent"
+      }
+    };
+
+    var POWER_LIST = [
+      { name: "Energy Blast", ranked: true },
+      { name: "Force Field", ranked: true },
+      { name: "Flight", ranked: true },
+      { name: "Super Strength", ranked: true },
+      { name: "Body Armor", ranked: true },
+      { name: "Regeneration", ranked: true },
+      { name: "Invisibility", ranked: true },
+      { name: "Phasing", ranked: true },
+      { name: "Telepathy", ranked: true },
+      { name: "Telekinesis", ranked: true },
+      { name: "Fire Generation", ranked: true },
+      { name: "Ice Generation", ranked: true },
+      { name: "Lightning Control", ranked: true },
+      { name: "Wall-Crawling", ranked: true },
+      { name: "Webcasting", ranked: true },
+      { name: "Elasticity", ranked: true },
+      { name: "Density Control", ranked: true },
+      { name: "Shrinking", ranked: true },
+      { name: "Growth", ranked: true },
+      { name: "Hyper-Speed", ranked: true },
+      { name: "Life Support", ranked: false },
+      { name: "Water Breathing", ranked: false }
+    ];
+
+    var TALENT_LIST = [
+      { name: "Acrobatics", note: "+1CS Agility for acrobatic maneuvers" },
+      { name: "Martial Arts A", note: "+1CS in unarmed combat damage" },
+      { name: "Martial Arts B", note: "+1CS Fighting in unarmed attacks" },
+      { name: "Martial Arts C", note: "May stun or slam with holds" },
+      { name: "Guns", note: "+1CS with shooting attacks" },
+      { name: "Thrown Weapons", note: "+1CS with thrown attacks" },
+      { name: "Pilot", note: "+1CS when flying aircraft" },
+      { name: "Driver", note: "+1CS when driving vehicles" },
+      { name: "Detective", note: "+1CS Reason with crime clues" },
+      { name: "Scientist", note: "+1CS Reason in science" },
+      { name: "Engineer", note: "+1CS Reason with tech gear" },
+      { name: "Medicine", note: "+1CS with medical or healing" },
+      { name: "Business", note: "+1CS with Resources rolls" },
+      { name: "Streetwise", note: "+1CS Intuition in street info" },
+      { name: "Criminal", note: "+1CS for crime related actions" },
+      { name: "Occult Lore", note: "+1CS Reason vs occult topics" },
+      { name: "Computers", note: "+1CS with computer tasks" },
+      { name: "Journalist", note: "+1CS to gather information" },
+      { name: "Performer", note: "+1CS Popularity with public" }
+    ];
+
+    var CONTACT_LIST = [
+      { name: "Police Detective", note: "Leads on crime, access to case files" },
+      { name: "Beat Cop", note: "Street reports, patrol level info" },
+      { name: "Reporter", note: "Media coverage, rumor mill" },
+      { name: "Editor", note: "Control on what hits the news" },
+      { name: "Street Informant", note: "Word on the street, gang talk" },
+      { name: "Crime Boss", note: "Underworld resources, favors owed" },
+      { name: "Fixer", note: "Makes problems disappear, no questions" },
+      { name: "Lawyer", note: "Legal help, bail, court tricks" },
+      { name: "Doctor", note: "Quiet medical treatment, advice" },
+      { name: "Scientist", note: "Lab time, tech analysis" },
+      { name: "Tech Specialist", note: "Gear repair, computer access" },
+      { name: "Government Agent", note: "Official intel, classified files" },
+      { name: "SHIELD Style Agent", note: "Super level intel, briefings" },
+      { name: "Underworld Snitch", note: "Gang plans, targets, safe houses" },
+      { name: "Local Business Owner", note: "Safe meeting spots, backup gear" },
+      { name: "Superhero Ally", note: "Backup in a fight, shared intel" },
+      { name: "Occult Expert", note: "Mystic lore, curses, rituals" },
+      { name: "Neighborhood Leader", note: "Community support, rumors" }
+    ];
+
+    var CURRENT_ABILITIES = null;
+    var CURRENT_IMAGE_SRC = "";
+
+    function randInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function pickRank(levelKey) {
+      var roll = randInt(1, 100);
+      var table = RANK_TABLES[levelKey] || RANK_TABLES.standard;
+      for (var i = 0; i < table.length; i++) {
+        var row = table[i];
+        if (roll >= row.min && row <= row.max) {
+          return { name: row.name, value: row.value, roll: roll };
+        }
+      }
+      return { name: table[0].name, value: table[0].value, roll: roll };
+    }
+
+    // Fix for pickRank typo
+    function pickRank(levelKey) {
+      var roll = randInt(1, 100);
+      var table = RANK_TABLES[levelKey] || RANK_TABLES.standard;
+      for (var i = 0; i < table.length; i++) {
+        var row = table[i];
+        if (roll >= row.min && roll <= row.max) {
+          return { name: row.name, value: row.value, roll: roll };
+        }
+      }
+      return { name: table[0].name, value: table[0].value, roll: roll };
+    }
+
+    function randomOriginKey() {
+      var keys = Object.keys(ORIGINS);
+      var idx = randInt(0, keys.length - 1);
+      return keys[idx];
+    }
+
+    function getEffectivePowerLevel() {
+      var originVal = document.getElementById("origin").value;
+      var levelSelect = document.getElementById("powerLevel");
+      var lvl = levelSelect.value || "standard";
+
+      if (originVal === "normal") {
+        lvl = "street";
+        levelSelect.value = "street";
+        return lvl;
+      }
+
+      if (lvl === "random") {
+        var choices = ["street", "standard", "cosmic"];
+        lvl = choices[randInt(0, choices.length - 1)];
+        levelSelect.value = lvl;
+      }
+
+      return lvl;
+    }
+
+    function buildAbilities(levelKey) {
+      var tbody = document.querySelector("#abilitiesTable tbody");
+      tbody.innerHTML = "";
+
+      var abilityData = {};
+
+      ABILITIES.forEach(function(ability) {
+        var rank = pickRank(levelKey);
+        abilityData[ability] = rank;
+
+        var tr = document.createElement("tr");
+
+        var tdName = document.createElement("td");
+        tdName.textContent = ability;
+        tdName.className = "ability-name";
+
+        var tdRank = document.createElement("td");
+        tdRank.textContent = rank.name;
+        tdRank.className = "ability-rank";
+
+        var tdVal = document.createElement("td");
+        tdVal.textContent = rank.value;
+
+        var tdBar = document.createElement("td");
+        var wrap = document.createElement("div");
+        wrap.className = "bar-wrapper";
+        var fill = document.createElement("div");
+        fill.className = "bar-fill";
+
+        var width = Math.min(100, (rank.value / 50) * 100);
+        fill.style.width = width + "%";
+
+        wrap.appendChild(fill);
+        tdBar.appendChild(wrap);
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdRank);
+        tr.appendChild(tdVal);
+        tr.appendChild(tdBar);
+
+        tbody.appendChild(tr);
+      });
+
+      CURRENT_ABILITIES = abilityData;
+      return abilityData;
+    }
+
+    function computeHealth(abilities) {
+      var keys = ["Fighting", "Agility", "Strength", "Endurance"];
+      var total = 0;
+      keys.forEach(function(k) {
+        if (abilities && abilities[k]) {
+          total += abilities[k].value;
+        }
+      });
+      return total;
+    }
+
+    function computeKarma(abilities) {
+      var keys = ["Reason", "Intuition", "Psyche"];
+      var total = 0;
+      keys.forEach(function(k) {
+        if (abilities && abilities[k]) {
+          total += abilities[k].value;
+        }
+      });
+      return total;
+    }
+
+    function autoFillMeta(originKey, abilities) {
+      var origin = ORIGINS[originKey];
+      if (!origin) return;
+
+      var powersCount = document.getElementById("powersCount");
+      var talentsCount = document.getElementById("talentsCount");
+      var contactsCount = document.getElementById("contactsCount");
+      var healthField = document.getElementById("health");
+      var karmaField = document.getElementById("karma");
+      var resourcesField = document.getElementById("resources");
+      var popularityField = document.getElementById("popularity");
+
+      powersCount.value = origin.powers;
+      talentsCount.value = origin.talents;
+      contactsCount.value = origin.contacts;
+
+      var health = computeHealth(abilities);
+      var karma = computeKarma(abilities);
+
+      healthField.value = health;
+      karmaField.value = karma;
+
+      var resourcesText = "Typical (6)";
+      if (originKey === "hi-tech") resourcesText = "Excellent (20)";
+      if (originKey === "alien") resourcesText = "Good (10)";
+      if (originKey === "robot") resourcesText = "Poor (4)";
+
+      resourcesField.value = resourcesText;
+      popularityField.value = origin.basePopularity;
+    }
+
+    function sampleNoReplace(list, count) {
+      var pool = list.slice();
+      var picked = [];
+      var n = Math.min(count, pool.length);
+      for (var i = 0; i < n; i++) {
+        var idx = randInt(0, pool.length - 1);
+        picked.push(pool[idx]);
+        pool.splice(idx, 1);
+      }
+      return picked;
+    }
+
+    function rollPowersInternal() {
+      var count = parseInt(document.getElementById("powersCount").value, 10);
+      if (isNaN(count) || count < 0) count = 0;
+
+      var levelKey = getEffectivePowerLevel();
+
+      var chosen = sampleNoReplace(POWER_LIST, count);
+      var lines = [];
+
+      chosen.forEach(function(p) {
+        if (p.ranked) {
+          var r = pickRank(levelKey);
+          lines.push(p.name + " - " + r.name + " (" + r.value + ")");
+        } else {
+          lines.push(p.name);
+        }
+      });
+
+      document.getElementById("powersList").value = lines.join("\n");
+    }
+
+    function rollTalentsInternal() {
+      var count = parseInt(document.getElementById("talentsCount").value, 10);
+      if (isNaN(count) || count < 0) count = 0;
+
+      var chosen = sampleNoReplace(TALENT_LIST, count);
+      var lines = [];
+
+      chosen.forEach(function(t) {
+        lines.push(t.name + " - " + t.note);
+      });
+
+      document.getElementById("talentsList").value = lines.join("\n");
+    }
+
+    function rollContactsInternal() {
+      var count = parseInt(document.getElementById("contactsCount").value, 10);
+      if (isNaN(count) || count < 0) count = 0;
+
+      var chosen = sampleNoReplace(CONTACT_LIST, count);
+      var lines = [];
+
+      chosen.forEach(function(c) {
+        lines.push(c.name + " - " + c.note);
+      });
+
+      document.getElementById("contactsList").value = lines.join("\n");
+    }
+
+    function splitLines(text) {
+      if (!text) return [];
+      return text.split(/\r?\n/).map(function(line) {
+        return line.trim();
+      }).filter(function(line) {
+        return line.length > 0;
+      });
+    }
+
+    function buildSummary(originKey, abilities) {
+      abilities = abilities || CURRENT_ABILITIES || {};
+
+      var heroName = document.getElementById("heroName").value || "Unnamed Hero";
+      var realName = document.getElementById("realName").value || "Unknown";
+      var powerLevelSel = document.getElementById("powerLevel");
+      var levelLabel = powerLevelSel.options[powerLevelSel.selectedIndex].text;
+      var campaign = document.getElementById("campaign").value || "";
+
+      var originLabel = originKey && ORIGINS[originKey]
+        ? ORIGINS[originKey].label
+        : (originKey === "random" ? "(Random)" : "Unknown");
+
+      var health = document.getElementById("health").value || "";
+      var karma = document.getElementById("karma").value || "";
+      var resources = document.getElementById("resources").value || "";
+      var popularity = document.getElementById("popularity").value || "";
+
+      var powersCount = document.getElementById("powersCount").value || "0";
+      var talentsCount = document.getElementById("talentsCount").value || "0";
+      var contactsCount = document.getElementById("contactsCount").value || "0";
+
+      var powersList = splitLines(document.getElementById("powersList").value);
+      var talentsList = splitLines(document.getElementById("talentsList").value);
+      var contactsList = splitLines(document.getElementById("contactsList").value);
+
+      var backgroundText = document.getElementById("background").value.trim();
+      var notesText = document.getElementById("notes").value.trim();
+
+      var portraitUrl = CURRENT_IMAGE_SRC || document.getElementById("imageUrl").value.trim();
+
+      var abilitiesRows = "";
+      ABILITIES.forEach(function(a) {
+        var r = abilities[a];
+        if (r) {
+          abilitiesRows +=
+            "<tr>" +
+              "<td>" + a + "</td>" +
+              "<td>" + r.name + "</td>" +
+              "<td>" + r.value + "</td>" +
+            "</tr>";
+        }
+      });
+
+      var powersHtml = "";
+      if (powersList.length === 0) {
+        powersHtml = '<div class="sheet-empty">No powers listed.</div>';
+      } else {
+        powersList.forEach(function(line) {
+          var parts = line.split(" - ");
+          var title = parts[0] || line;
+          var rest = parts.slice(1).join(" - ");
+          powersHtml += '<div class="sheet-list-item">';
+          powersHtml += '<span class="sheet-list-label">' + title + '</span>';
+          if (rest) {
+            powersHtml += " - " + rest;
+          }
+          powersHtml += "</div>";
+        });
+      }
+
+      var talentsHtml = "";
+      if (talentsList.length === 0) {
+        talentsHtml = '<div class="sheet-empty">No talents listed.</div>';
+      } else {
+        talentsList.forEach(function(line) {
+          var parts = line.split(" - ");
+          var title = parts[0] || line;
+          var rest = parts.slice(1).join(" - ");
+          talentsHtml += '<div class="sheet-list-item">';
+          talentsHtml += '<span class="sheet-list-label">' + title + '</span>';
+          if (rest) {
+            talentsHtml += " - " + rest;
+          }
+          talentsHtml += "</div>";
+        });
+      }
+
+      var contactsHtml = "";
+      if (contactsList.length === 0) {
+        contactsHtml = '<div class="sheet-empty">No contacts listed.</div>';
+      } else {
+        contactsList.forEach(function(line) {
+          var parts = line.split(" - ");
+          var title = parts[0] || line;
+          var rest = parts.slice(1).join(" - ");
+          contactsHtml += '<div class="sheet-list-item">';
+          contactsHtml += '<span class="sheet-list-label">' + title + '</span>';
+          if (rest) {
+            contactsHtml += " - " + rest;
+          }
+          contactsHtml += "</div>";
+        });
+      }
+
+      var vitalsHtml = "";
+      vitalsHtml += '<div class="sheet-vitals-line"><span>Health</span><span>' + (health || "N/A") + "</span></div>";
+      vitalsHtml += '<div class="sheet-vitals-line"><span>Karma</span><span>' + (karma || "N/A") + "</span></div>";
+      vitalsHtml += '<div class="sheet-vitals-line"><span>Resources</span><span>' + (resources || "N/A") + "</span></div>";
+      vitalsHtml += '<div class="sheet-vitals-line"><span>Popularity</span><span>' + (popularity || "N/A") + "</span></div>";
+      if (campaign) {
+        vitalsHtml += '<div class="sheet-vitals-line"><span>Campaign</span><span>' + campaign + "</span></div>";
+      }
+
+      var backgroundHtml = backgroundText || "left blank";
+      var notesHtml = notesText || "left blank";
+
+      var html = "";
+      html += '<div class="sheet">';
+      html += '  <div class="sheet-row sheet-header-row">';
+      html += '    <div class="sheet-hero-block">';
+      html += '      <div class="sheet-label">Hero</div>';
+      html += '      <div class="sheet-value big">' + heroName + "</div>";
+      html += '      <div style="margin-top:0.2rem;">';
+      html += '        <span class="sheet-label">Real Name</span>';
+      html += '        <span class="sheet-value" style="margin-left:0.35rem;">' + realName + "</span>";
+      html += "      </div>";
+      html += "    </div>";
+      html += '    <div class="sheet-origin-block">';
+      html += '      <div class="sheet-origin-line">';
+      html += '        <span class="sheet-label">Origin</span>';
+      html += '        <span class="sheet-value" style="font-size:0.85rem;">' + originLabel + "</span>";
+      html += "      </div>";
+      html += '      <div class="sheet-origin-line" style="margin-top:0.2rem;">';
+      html += '        <span class="sheet-label">Power Level</span>';
+      html += '        <span class="sheet-value" style="font-size:0.85rem;">' + levelLabel + "</span>";
+      html += "      </div>";
+      html += "    </div>";
+      html += "  </div>";
+
+      html += '  <div class="sheet-mid-row">';
+      html += '    <div class="sheet-image-box">';
+      if (portraitUrl) {
+        html += '      <img src="' + portraitUrl + '" alt="Hero Portrait">';
+      } else {
+        html += '      <div class="sheet-image-placeholder">Portrait</div>';
+      }
+      html += "    </div>";
+
+      html += '    <div class="sheet-box">';
+      html += '      <div class="sheet-box-title">Abilities</div>';
+      html += '      <table><tbody>' + abilitiesRows + "</tbody></table>";
+      html += "    </div>";
+
+      html += '    <div class="sheet-box">';
+      html += '      <div class="sheet-box-title">Vitals</div>';
+      html += vitalsHtml;
+      html += "    </div>";
+      html += "  </div>";
+
+      html += '  <div class="sheet-bottom-row">';
+      html += '    <div class="sheet-box">';
+      html += '      <div class="sheet-box-title">Powers (' + powersCount + ")</div>";
+      html += '      <div class="sheet-list">' + powersHtml + "</div>";
+      html += "    </div>";
+      html += '    <div class="sheet-box">';
+      html += '      <div class="sheet-box-title">Talents (' + talentsCount + ")</div>";
+      html += '      <div class="sheet-list">' + talentsHtml + "</div>";
+      html += "    </div>";
+      html += '    <div class="sheet-box">';
+      html += '      <div class="sheet-box-title">Contacts (' + contactsCount + ")</div>";
+      html += '      <div class="sheet-list">' + contactsHtml + "</div>";
+      html += "    </div>";
+      html += "  </div>";
+
+      html += '  <div class="sheet-bottom-row-2">';
+      html += '    <div class="sheet-box">';
+      html += '      <div class="sheet-box-title">Background</div>';
+      html += '      <div class="sheet-list">' + backgroundHtml + "</div>";
+      html += "    </div>";
+      html += '    <div class="sheet-box">';
+      html += '      <div class="sheet-box-title">Notes</div>';
+      html += '      <div class="sheet-list">' + notesHtml + "</div>";
+      html += "    </div>";
+      html += "  </div>";
+
+      html += "</div>";
+
+      document.getElementById("summary").innerHTML = html;
+    }
+
+    function rollAbilitiesOnly() {
+      var levelKey = getEffectivePowerLevel();
+      var abilityData = buildAbilities(levelKey);
+      return abilityData;
+    }
+
+    function generateFullHero() {
+      var originSelect = document.getElementById("origin");
+      var originKey = originSelect.value;
+      if (originKey === "random") {
+        originKey = randomOriginKey();
+        originSelect.value = originKey;
+      }
+
+      var abilities = rollAbilitiesOnly();
+      autoFillMeta(originKey, abilities);
+
+      rollPowersInternal();
+      rollTalentsInternal();
+      rollContactsInternal();
+
+      buildSummary(originKey, abilities);
+    }
+
+    function rollAbilitiesButton() {
+      var originKey = document.getElementById("origin").value;
+      if (originKey === "random") {
+        originKey = "altered";
+      }
+      var abilities = rollAbilitiesOnly();
+      autoFillMeta(originKey, abilities);
+      buildSummary(originKey, abilities);
+    }
+
+    function rollPowersButton() {
+      var originKey = document.getElementById("origin").value;
+      if (originKey === "random") {
+        originKey = "altered";
+      }
+      rollPowersInternal();
+      buildSummary(originKey, CURRENT_ABILITIES);
+    }
+
+    function rollTalentsButton() {
+      var originKey = document.getElementById("origin").value;
+      if (originKey === "random") {
+        originKey = "altered";
+      }
+      rollTalentsInternal();
+      buildSummary(originKey, CURRENT_ABILITIES);
+    }
+
+    function rollContactsButton() {
+      var originKey = document.getElementById("origin").value;
+      if (originKey === "random") {
+        originKey = "altered";
+      }
+      rollContactsInternal();
+      buildSummary(originKey, CURRENT_ABILITIES);
+    }
+
+    function clearSheet() {
+      document.getElementById("heroName").value = "";
+      document.getElementById("realName").value = "";
+      document.getElementById("playerName").value = "";
+      document.getElementById("campaign").value = "";
+      document.getElementById("background").value = "";
+      document.getElementById("notes").value = "";
+      document.getElementById("origin").value = "random";
+      document.getElementById("powerLevel").value = "random";
+
+      document.getElementById("imageUrl").value = "";
+      var fileInput = document.getElementById("imageFile");
+      if (fileInput) fileInput.value = "";
+      CURRENT_IMAGE_SRC = "";
+
+      document.getElementById("powersCount").value = "0";
+      document.getElementById("talentsCount").value = "0";
+      document.getElementById("contactsCount").value = "0";
+
+      document.getElementById("powersList").value = "";
+      document.getElementById("talentsList").value = "";
+      document.getElementById("contactsList").value = "";
+
+      document.getElementById("resources").value = "";
+      document.getElementById("karma").value = "";
+      document.getElementById("health").value = "";
+      document.getElementById("popularity").value = "";
+
+      document.querySelector("#abilitiesTable tbody").innerHTML = "";
+      document.getElementById("summary").innerHTML =
+        '<div class="sheet-empty">Generate a hero to show a full character sheet preview here.</div>';
+
+      CURRENT_ABILITIES = null;
+      initBlankAbilities();
+    }
+
+    function initBlankAbilities() {
+      var tbody = document.querySelector("#abilitiesTable tbody");
+      tbody.innerHTML = "";
+      ABILITIES.forEach(function(a) {
+        var tr = document.createElement("tr");
+        var tdName = document.createElement("td");
+        var tdRank = document.createElement("td");
+        var tdVal = document.createElement("td");
+        var tdBar = document.createElement("td");
+        tdName.textContent = a;
+        tdName.className = "ability-name";
+        tdRank.textContent = "-";
+        tdVal.textContent = "-";
+        var wrap = document.createElement("div");
+        wrap.className = "bar-wrapper";
+        var fill = document.createElement("div");
+        fill.className = "bar-fill";
+        fill.style.width = "5%";
+        wrap.appendChild(fill);
+        tdBar.appendChild(wrap);
+        tr.appendChild(tdName);
+        tr.appendChild(tdRank);
+        tr.appendChild(tdVal);
+        tr.appendChild(tdBar);
+        tbody.appendChild(tr);
+      });
+    }
+
+    function handleOriginChange() {
+      var originVal = document.getElementById("origin").value;
+      if (originVal === "normal") {
+        document.getElementById("powerLevel").value = "street";
+      }
+    }
+
+    document.getElementById("origin").addEventListener("change", handleOriginChange);
+
+    var imageFileInput = document.getElementById("imageFile");
+    if (imageFileInput) {
+      imageFileInput.addEventListener("change", function (e) {
+        var file = e.target.files[0];
+        if (!file) {
+          CURRENT_IMAGE_SRC = "";
+          return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (ev) {
+          CURRENT_IMAGE_SRC = ev.target.result;
+          buildSummary(document.getElementById("origin").value, CURRENT_ABILITIES);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    initBlankAbilities();
+  </script>
+</body>
+</html>
